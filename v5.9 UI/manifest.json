@@ -1,0 +1,58 @@
+{
+  "manifest_version": 2,
+  "name": "VoxSyn Dictation",
+  "version": "6.0",
+  "description": "Inject a 'Dictate' button to record and transcribe notes into eScribe text fields using Whisper.",
+  
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "permissions": [
+    "activeTab", 
+    "storage",
+    "microphone",
+    "tts",
+
+    "https://ehr.escribe.com/*",
+    "https://api.openai.com/*",
+    "https://portal.escribe.com/*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "browser_action": {
+    "default_title": "VoxSyn Dictation",
+    "default_icon": {
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup.html"
+  },
+"content_scripts": [
+  {
+    "matches": [
+      "https://ehr.escribe.com/*",
+      "https://portal.escribe.com/*"
+    ],
+    "js": ["content-script.js"],
+    "run_at": "document_idle"
+  }
+],
+
+  "web_accessible_resources": [
+    "icons/icon48.png",
+    "icons/icon128.png"
+  ],
+
+  "applications": {
+    "gecko": {
+      "id": "lennaad@gmail.com11",
+      "strict_min_version": "58.0"
+    }
+  }
+}
